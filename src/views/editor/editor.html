@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Editor</title>
+    <link rel="stylesheet" href="./css/main.css">
+  </head>
+
+  <body onload="init()">
+    <div id='bodyDiv'>
+      <div id='leftDiv'>
+        <div id='controlBar'>
+          <button id='clearButton'>Clear</button>
+          <button id='nextButton'>Next</button>
+          <button id='finishButton'>Finish</button>
+        </div>
+        <div id='visualContainer' class='inkingArea'>
+          <canvas id='inkCanvas'></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/InkAnalysis.js"></script>
+    <script src="./js/inkHelper.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
