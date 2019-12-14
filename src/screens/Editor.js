@@ -13,7 +13,7 @@ class Editor extends Component {
   render() {
     return (
       <WebView
-      source={{uri: '192.168.43.66:8080'}}
+      source={{uri: 'http://192.168.43.66:8080/'}}
       style={{marginTop: 20}}
     />
     );
