@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "inline": "html-inline src/views/editor/editor.html -o dist/editor.html"
   },
   "dependencies": {
     "@terrylinla/react-native-sketch-canvas": "^0.8.0",
@@ -27,7 +28,8 @@
     "react-navigation-stack": "^1.10.3"
   },
   "devDependencies": {
-    "babel-preset-expo": "~8.0.0"
+    "babel-preset-expo": "~8.0.0",
+    "html-inline": "^1.2.0"
   },
   "private": true
 }

@@ -153,7 +153,9 @@ class Home extends Component {
             </View>
           </View>
           <View style={styles.section}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button}
+              onPress={() => this.props.navigation.navigate('Editor')}
+            >
               <Text style={{color: '#fff', fontSize: 16, fontWeight: '700'}}>SEE ALL</Text>
             </TouchableOpacity>
           </View>
