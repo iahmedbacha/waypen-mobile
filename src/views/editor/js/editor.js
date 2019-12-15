@@ -1,7 +1,7 @@
 var request = "";
 var inkRecognzier;
 var inkCanvas;
-var words = ['this', 'is', 'a', 'text'];
+var words;
 var strokes = [];
 var count = 0;
 
@@ -34,11 +34,14 @@ function next() {
     });
     inkCanvas.clear();
     count++;
-    console.log(count === words.length);
     if (count === words.length) {
         document.getElementById('nextButton').style.display = 'none';
         document.getElementById('finishButton').style.display = 'inline-block';
     }
+}
+
+function postMessage(request) {
+    window.ReactNativeWebView.postMessage(request);
 }
 
 function finish() {
@@ -50,9 +53,5 @@ function finish() {
     });
 
     request = JSON.stringify(JSON.parse(inkRecognizer.data()), null, 2);
-    showRequest();
-}
-
-function showRequest() {
-    console.log(request.toString());
+    postMessage(request);
 }

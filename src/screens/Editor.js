@@ -9,6 +9,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      words: ['this', 'is', 'another', 'text'],
       isHTMLFileLoaded: false
     };
   }
@@ -27,6 +28,20 @@ class Editor extends Component {
     }
   }
 
+  onMessage(event) {
+    alert(event.nativeEvent.data);
+  }
+
+  // generating the script to be injected into the webview
+  injectedJavaScript() {
+    var words = 'words = [';
+    for (let i = 0; i < this.state.words.length; i++) {
+      words += '"' + this.state.words[i] + '"' + (i < this.state.words.length - 1 ? ',' : '');
+    }
+    words += '];';
+    return words;
+  }
+
   render() {
     if (!this.state.isHTMLFileLoaded) {
       return null;
@@ -35,7 +50,6 @@ class Editor extends Component {
     return (
       <WebView
         originWhitelist={['*']}
-        javaScriptEnabled={true}
         allowFileAccess={true}
         source={
           Platform.OS === 'android'
@@ -46,6 +60,8 @@ class Editor extends Component {
             }
             : editor}
         style={{marginTop: 20}}
+        onMessage={this.onMessage}
+        injectedJavaScript={this.injectedJavaScript()}
       />
     );
   }
