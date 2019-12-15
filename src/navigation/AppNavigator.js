@@ -1,8 +1,10 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
 
 import Auth from './Auth';
-import Screens from './Screens';
+import MainNavigation from './MainNavigation';
 
 export default createAppContainer(createSwitchNavigator({
-	Screens,
+	Auth,
+	MainNavigation,
 }))

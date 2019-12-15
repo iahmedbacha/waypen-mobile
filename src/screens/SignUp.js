@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { WebView } from 'react-native-webview';
-import TextCard from '../components/TextCard';
 
 
-class Editor extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +12,7 @@ class Editor extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextCard/>
+        <Text>SignUp</Text>
       </View>
     );
   }
@@ -28,4 +26,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default Editor;
+export default SignUp;
