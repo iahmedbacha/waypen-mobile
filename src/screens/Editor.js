@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { Asset } from 'expo-asset';
 
-const editor = require('../views/editor/editor.html');
+const editor = require('../../dist/editor.html');
 
 class Editor extends Component {
   constructor(props) {
