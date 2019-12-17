@@ -9,7 +9,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: ['this', 'is', 'another', 'text'],
+      words: ['this', 'is', 'another'],
       isHTMLFileLoaded: false
     };
   }
@@ -35,13 +35,13 @@ class Editor extends Component {
   }
 
   // generating the script to be injected into the webview
-  injectedJavaScript() {
-    var words = 'const words = [';
+  run() {
+    var script = `words = [`;
     for (let i = 0; i < this.state.words.length; i++) {
-      words += '"' + this.state.words[i] + '"' + (i < this.state.words.length - 1 ? ',' : '');
+      script += `"${this.state.words[i]}"` + (i < this.state.words.length - 1 ? `,` : ``);
     }
-    words += '];document.getElementById("wordSpan").innerHTML = words[0];var count=1;';
-    return words;
+    script += `];`;
+    return script;
   }
 
   render() {
@@ -49,16 +49,15 @@ class Editor extends Component {
       return null;
     }
     const { localUri } = this.HTMLFile;
-    const run = `
-      this.webview.postMessage("Hello from RN");
-    `;
+    const run = this.run();
     setTimeout(() => {
       this.webref.injectJavaScript(run);
-    }, 300);
+    }, 25);
     return (
       <WebView
-        originWhitelist={['*']}
         ref={r => (this.webref = r)}
+        originWhitelist={['*']}
+        onMessage={this.onMessage}
         allowFileAccess={true}
         source={
           Platform.OS === 'android'
@@ -69,8 +68,6 @@ class Editor extends Component {
             }
             : editor}
         style={{marginTop: 20}}
-        onMessage={this.onMessage}
-        injectedJavaScript={this.injectedJavaScript()}
       />
     );
   }
