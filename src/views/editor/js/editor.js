@@ -60,10 +60,5 @@ function finish() {
     });
 
     request = JSON.stringify(JSON.parse(inkRecognizer.data()), null, 2);
-    showRequest();
-}
-
-function showRequest() {
-    console.log(request.toString());
-    alert(request.toString());
+    window.ReactNativeWebView.postMessage(request.toString());
 }

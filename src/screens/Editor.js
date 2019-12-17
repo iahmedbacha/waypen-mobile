@@ -9,7 +9,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: ['this', 'is', 'another'],
+      words: null,
       isHTMLFileLoaded: false
     };
   }
@@ -30,8 +30,11 @@ class Editor extends Component {
     }
   }
 
-  onMessage(event) {
-    alert(event.nativeEvent.data);
+
+  onMessage = (event) => {
+    this.props.navigation.navigate('Test', {
+      data: event.nativeEvent.data
+    });
   }
 
   // generating the script to be injected into the webview
@@ -57,7 +60,7 @@ class Editor extends Component {
       <WebView
         ref={r => (this.webref = r)}
         originWhitelist={['*']}
-        onMessage={this.onMessage}
+        onMessage={event => this.onMessage(event)}
         allowFileAccess={true}
         source={
           Platform.OS === 'android'
