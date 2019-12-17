@@ -59,6 +59,7 @@ class Editor extends Component {
     }, 25);
     return (
       <WebView
+        scalesPageToFit={false}
         ref={r => (this.webref = r)}
         originWhitelist={['*']}
         onMessage={event => this.onMessage(event)}

@@ -5,22 +5,25 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="./css/editor.css">    
+    <script>
+      
+    </script>
   </head>
 
   <body onload="init()">
     <div id='bodyDiv'>
       <div id='leftDiv'>
-        <div class="container"> 
           <div id='controlBar'>
-            <button id='clearButton'>Clear</button>
-            <span id='wordSpan' class="badge badge-success"></span>
-            <button id='nextButton'>Next</button>
-            <button id='finishButton'>Finish</button>
+            <button class="btn" id='clearButton' style="flex: 1;">Clear</button>
+            <div style="width: 120px; display: inline-block" class="spanContainer" ><span id='wordSpan' class=""></span></div>
+            
+            <button class="btn" id='nextButton'>Next</button>
+            <button class="btn" id='finishButton'>Finish</button>
           </div>
           <div id='visualContainer' class='inkingArea'>
-            <canvas id='inkCanvas' style="border:2px solid #CCC;touch-action:none;" width="900" height="2000"></canvas>
+            <canvas id='inkCanvas' style="border:2px solid #CCC;touch-action:none;" width="360px" height="640px"></canvas>
           </div>
-        </div>
+
       </div>
     </div>
 

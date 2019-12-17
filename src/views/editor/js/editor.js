@@ -6,13 +6,15 @@ var strokes = [];
 var count = 0;
 
 function init() {
+    
     inkRecognizer = new Recognizer();
     inkCanvas = new InkCanvas('inkCanvas');
     count = 0;
 
     setTimeout(() => {
+        
         document.getElementById('wordSpan').innerHTML = words[0];
-      }, 50);
+      }, 100);
 
     document.getElementById('clearButton').addEventListener("click", function () {
         clear();

@@ -17,11 +17,6 @@ import * as SecureStore from 'expo-secure-store';
 
 const mainColor = '#8bc34a';
 
-const dataRing = {
-  labels: ["Swim", "Bike", "Run"], // optional
-  data: [, ,0.8]
-};
-
 const chartConfig = {
   backgroundGradientFrom: "rgba(0,0,0,0)",
   backgroundGradientFromOpacity: 0,
@@ -42,14 +37,14 @@ class Test extends Component {
       result: null,
       recieved: false,
       bestCharacters: null,
-      worstCharacters: null
+      worstCharacters: null,
+      dataRing: null
     };
     this.getTestResults();
   }
 
   getTestResults = async () => {
     var body = '{"handwriting":' + this.props.navigation.getParam('data') + ',"textId":"' + this.props.navigation.getParam('text').id + '"}';
-    alert(API_URL);
     console.log(body);
     return fetch((API_URL+'/tests'), {
       method: 'POST',
@@ -87,7 +82,10 @@ class Test extends Component {
         result: result,
         recieved: true,
         bestCharacters: bestCharacters,
-        worstCharacters: worstCharacters
+        worstCharacters: worstCharacters,
+        dataRing: {
+          data: [,,result.score]
+        }
       });
     })
     .catch(error => {
@@ -158,7 +156,7 @@ class Test extends Component {
             <Text style={styles.title}> Test score</Text>
             <View style={styles.chartHolder}>
               <ProgressChart
-                data={dataRing}
+                data={this.state.dataRing}
                 width={imageWidth-40}
                 height={220}
                 chartConfig={chartConfig}

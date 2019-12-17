@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { API_URL } from 'react-native-dotenv';
 import * as SecureStore from 'expo-secure-store';
+import { withNavigation } from 'react-navigation';
+
 
 import TextCard from '../components/TextCard';
 
@@ -92,4 +94,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Texts;
+export default withNavigation(Texts);

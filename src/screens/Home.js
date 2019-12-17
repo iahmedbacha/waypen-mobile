@@ -16,6 +16,7 @@ import Texts from './Texts';
 
 
 const mainColor = '#8bc34a';
+const greyColor = '#777'
 
 const dataRing = {
   labels: ["Swim", "Bike", "Run"], // optional
@@ -93,7 +94,7 @@ class Home extends Component {
         >
           <Gravatar options={{
               email: 'ibrahimb31@hotmail.fr',
-              parameters: { "size": "100", "d": "retro" },
+              parameters: { "size": "70", "d": "retro" },
             }}
             style={styles.roundedProfileImage}
           />
@@ -124,14 +125,14 @@ class Home extends Component {
               <Button style={{width: '100%'}} mode="text"
                 onPress={() => this.setState(previousState => ({page: 'home'}))}
               >
-                <Feather name="home" size={28} color={mainColor} />
+                <Feather name="home" size={28} color={greyColor} />
               </Button> 
             </View>
             <View style={styles.iconContainer}>
               <Button style={{width: '100%'}} mode="text" 
                 onPress={() => this.setState(previousState => ({page: 'texts'}))}
               >
-                <Feather name="file-text" size={28} color={mainColor}/>
+                <Feather name="file-text" size={28} color={greyColor}/>
               </Button> 
             </View>
             <View style={[styles.iconContainer, {flex: 1.5}]}>
@@ -146,14 +147,14 @@ class Home extends Component {
               <Button style={{width: '100%'}} mode="text" 
                 onPress={() => this.setState(previousState => ({page: 'award'}))}
               >
-                <Feather name="award" size={28} color={mainColor}/>
+                <Feather name="award" size={28} color={greyColor}/>
               </Button> 
             </View>
             <View style={styles.iconContainer}>
               <Button style={{width: '100%'}} mode="text" 
                 onPress={() => this.setState(previousState => ({page: 'settings'}))}
               >
-                <Feather name="settings" size={28} color={mainColor}/>
+                <Feather name="settings" size={28} color={greyColor}/>
               </Button> 
             </View>
         </View>
@@ -295,7 +296,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   roundedProfileImage: {
-    width:50, height:50, borderWidth:3,
+    width:40, height:40, borderWidth:3,
     borderColor:'white', borderRadius:50
   }
 })
