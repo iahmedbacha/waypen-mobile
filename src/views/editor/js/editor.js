@@ -5,8 +5,11 @@ var words;
 var strokes = [];
 var count = 0;
 
+document.addEventListener("message", function(data) {
+    alert(data);
+});
+
 function init() {
-    draw();
     inkRecognizer = new Recognizer();
     inkCanvas = new InkCanvas('inkCanvas');
     count = 0;
@@ -56,8 +59,3 @@ function finish() {
     request = JSON.stringify(JSON.parse(inkRecognizer.data()), null, 2);
     postMessage(request);
 }
-
-function draw() {
-    document.getElementById("inkCanvas").width = window.innerWidth;
-    document.getElementById("inkCanvas").width = window.innerHeight;
-  }

@@ -2,12 +2,9 @@
 <html>
   <head>
     <title>Editor</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    
-    <link rel="stylesheet" href="./css/editor.css">
-    <link rel="stylesheet" href="css/main.css">
-    
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/editor.css">    
   </head>
 
   <body onload="init()">
@@ -16,11 +13,12 @@
         <div class="container"> 
           <div id='controlBar'>
             <button id='clearButton'>Clear</button>
+            <span id='wordSpan' class="badge badge-success">tt</span>
             <button id='nextButton'>Next</button>
             <button id='finishButton'>Finish</button>
           </div>
           <div id='visualContainer' class='inkingArea'>
-            <canvas id='inkCanvas' style="border:2px solid #CCC;touch-action:none;" width="1366" height="2000"></canvas>
+            <canvas id='inkCanvas' style="border:2px solid #CCC;touch-action:none;" width="900" height="2000"></canvas>
           </div>
         </div>
       </div>

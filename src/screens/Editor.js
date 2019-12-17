@@ -15,6 +15,8 @@ class Editor extends Component {
   }
 
   componentDidMount() {
+    const { navigation } = this.props;
+    this.setState({words: navigation.getParam('text').content.split(' ')});
     this.HTMLFile = Asset.fromModule(editor)
 
     if (!this.HTMLFile.localUri) {
@@ -34,11 +36,11 @@ class Editor extends Component {
 
   // generating the script to be injected into the webview
   injectedJavaScript() {
-    var words = 'words = [';
+    var words = 'const words = [';
     for (let i = 0; i < this.state.words.length; i++) {
       words += '"' + this.state.words[i] + '"' + (i < this.state.words.length - 1 ? ',' : '');
     }
-    words += '];';
+    words += '];document.getElementById("wordSpan").innerHTML = words[0];var count=1;';
     return words;
   }
 
@@ -47,9 +49,16 @@ class Editor extends Component {
       return null;
     }
     const { localUri } = this.HTMLFile;
+    const run = `
+      this.webview.postMessage("Hello from RN");
+    `;
+    setTimeout(() => {
+      this.webref.injectJavaScript(run);
+    }, 300);
     return (
       <WebView
         originWhitelist={['*']}
+        ref={r => (this.webref = r)}
         allowFileAccess={true}
         source={
           Platform.OS === 'android'

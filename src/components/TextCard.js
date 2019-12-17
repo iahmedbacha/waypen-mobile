@@ -14,8 +14,8 @@ class TextCard extends Component {
         <View style={styles.container}>
           <Text style={styles.title}>{this.props.title}</Text>
           <Text style={styles.text}>{this.props.text}</Text>
-          <TouchableOpacity style={styles.button}>
-            <Text style={{color: '#fff', fontWeight: '700'}}>See more</Text>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.onPress()}>
+            <Text style={{color: '#fff', fontWeight: '700'}}>Perform test</Text>
           </TouchableOpacity>
         </View>
     );

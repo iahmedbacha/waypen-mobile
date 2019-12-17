@@ -1,32 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import TextCard from '../components/TextCard';
+import { API_URL } from 'react-native-dotenv';
+import * as SecureStore from 'expo-secure-store';
 
 const dimensions = Dimensions.get('window');
 const screenWidth = dimensions.width;
-
-var table = [
-    {
-      id: 1,
-      title: 'Title01',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 2,
-      title: 'Title02',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 3,
-      title: 'Title03',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 4,
-      title: 'Title04',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-  ]
 
 class Texts extends Component {
   static navigationOptions = {
@@ -36,18 +15,53 @@ class Texts extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      texts: [],
+      recieved: false
     };
+    this.getTexts();
+  }
+
+  getTexts = async () => {
+    return fetch((API_URL+'/texts'), {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'authorization': 'Bearer ' + await SecureStore.getItemAsync('accessToken')
+      }
+    })
+    .then(response => response.json())
+    .then(responseJson => {
+      console.log(responseJson.result);
+      this.setState({
+        texts: responseJson.result,
+        recieved: true
+      });
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
+  performText = (text) => {
+    console.log('here');
+    this.props.navigation.navigate('Editor', {
+      text: text
+    });
   }
 
   render() {
+    if (!this.state.recieved){
+      return null;
+    }
+
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Text style={styles.title}>Choose a text to start your test</Text>
-          <TextCard title={table[0].title} text={table[0].text}/>
-          <TextCard title={table[1].title} text={table[1].text}/>
-          <TextCard title={table[2].title} text={table[2].text}/>
-          <TextCard title={table[3].title} text={table[3].text}/>
+          {this.state.texts.map(text => {
+            return (<TextCard key={text.id} title={text.designation} text={text.content} onPress={() => this.performText(text)}/>);
+          })}
         </ScrollView>
       </View>
     );

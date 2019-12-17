@@ -25,10 +25,14 @@
       "assets/**"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.waytech.waypen"
     },
     "packagerOpts": {
       "assetExts": ["html"]
+    },
+    "android": {
+      "package": "com.waytech.waypen"
     }
   }
 }

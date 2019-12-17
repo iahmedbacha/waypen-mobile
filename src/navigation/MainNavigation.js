@@ -6,12 +6,10 @@ import Home from '../screens/Home';
 import Editor from '../screens/Editor';
 import Texts from '../screens/Texts';
 
-
-
 const StackNavigator = createStackNavigator({
   Home, 
   Editor,
-  Texts
+  Texts,
 })
 
 const DrawerNavigator =  createDrawerNavigator( {

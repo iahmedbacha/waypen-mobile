@@ -27,11 +27,6 @@ button:disabled, button[disabled] {
     margin-left:10px;
 }
 
-#controlBar {
-    height:40px;
-    display: block;
-}
-
 #finishButton {
     display: none;
 }
