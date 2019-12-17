@@ -8,6 +8,13 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+import { Button } from 'react-native-paper';
+import { Feather } from '@expo/vector-icons';
+
+import Texts from './Texts';
+
+
+const mainColor = '#8bc34a';
 
 const dataRing = {
   labels: ["Swim", "Bike", "Run"], // optional
@@ -93,6 +100,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 'home'
     };
   }
 
@@ -100,66 +108,111 @@ class Home extends Component {
     return(
       <View style={styles.appBarBottom}>
         <Image resizeMode={'cover'} style={{width: imageWidth, height: 90}} source={require('../assets/appBar.png')}/>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('Texts')}
-          style={styles.FAB}
-        >
-          <Image style={{width: 36, height: 36}} source={require('../assets/QRCode.png')}/>
-        </TouchableOpacity>
+        <View style={{
+          width: '100%', 
+          height: '60%', 
+          position: 'absolute',
+          flexDirection: 'row',
+          bottom: 3}}>
+            <View style={styles.iconContainer}  >
+              <Button style={{width: '100%'}} mode="text"
+                onPress={() => this.setState(previousState => ({page: 'home'}))}
+              >
+                <Feather name="home" size={28} color={mainColor} />
+              </Button> 
+            </View>
+            <View style={styles.iconContainer}>
+              <Button style={{width: '100%'}} mode="text" 
+                onPress={() => this.setState(previousState => ({page: 'texts'}))}
+              >
+                <Feather name="file-text" size={28} color={mainColor}/>
+              </Button> 
+            </View>
+            <View style={[styles.iconContainer, {flex: 1.5}]}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Texts')}
+                style={styles.FAB}
+              >
+                <Image style={{width: 36, height: 36}} source={require('../assets/QRCode.png')}/>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.iconContainer}>
+              <Button style={{width: '100%'}} mode="text" 
+                onPress={() => this.setState(previousState => ({page: 'award'}))}
+              >
+                <Feather name="award" size={28} color={mainColor}/>
+              </Button> 
+            </View>
+            <View style={styles.iconContainer}>
+              <Button style={{width: '100%'}} mode="text" 
+                onPress={() => this.setState(previousState => ({page: 'settings'}))}
+              >
+                <Feather name="settings" size={28} color={mainColor}/>
+              </Button> 
+            </View>
+        </View>
+        
       </View>
+    )
+  }
+
+  renderHome() {
+    return(
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.section}>
+          <Text style={styles.title}> Overall score</Text>
+          <View style={styles.chartHolder}>
+            <ProgressChart
+              data={dataRing}
+              width={imageWidth-40}
+              height={220}
+              chartConfig={chartConfig}
+              hideLegend={true}
+              style={{position: 'relative', left: 40}}
+            />
+            <Text style={styles.overallScore}>79%</Text>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.title}> Characters with best precision</Text>
+          <View style={styles.chartHolder}>
+            <BarChart data={dataChart} width={imageWidth-40} height={220}
+              yAxisLabel={'%'} chartConfig={chartConfig} verticalLabelRotation={30}
+            />
+          </View>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.title}> Characters with worst precision</Text>
+          <View style={styles.chartHolder}>
+            <BarChart data={dataChart} width={imageWidth-40} height={220}
+              yAxisLabel={'%'} chartConfig={chartConfig} verticalLabelRotation={30}
+            />
+          </View>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.title}> Characters Heatmap</Text>
+          <View style={styles.chartHolder}>
+            <ContributionGraph values={commitsData} endDate={new Date('2017-04-01')}
+              numDays={105} width={imageWidth-40} height={220} chartConfig={chartConfig} 
+            />
+          </View>
+        </View>
+        <View style={styles.section}>
+          <TouchableOpacity style={styles.button}
+            onPress={() => this.props.navigation.navigate('Editor')}
+          >
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: '700'}}>SEE ALL</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View style={styles.section}>
-            <Text style={styles.title}> Overall score</Text>
-            <View style={styles.chartHolder}>
-              <ProgressChart
-                data={dataRing}
-                width={imageWidth-40}
-                height={220}
-                chartConfig={chartConfig}
-                hideLegend={true}
-                style={{position: 'relative', left: 40}}
-              />
-              <Text style={styles.overallScore}>79%</Text>
-            </View>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.title}> Characters with best precision</Text>
-            <View style={styles.chartHolder}>
-              <BarChart data={dataChart} width={imageWidth-40} height={220}
-                yAxisLabel={'%'} chartConfig={chartConfig} verticalLabelRotation={30}
-              />
-            </View>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.title}> Characters with worst precision</Text>
-            <View style={styles.chartHolder}>
-              <BarChart data={dataChart} width={imageWidth-40} height={220}
-                yAxisLabel={'%'} chartConfig={chartConfig} verticalLabelRotation={30}
-              />
-            </View>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.title}> Characters Heatmap</Text>
-            <View style={styles.chartHolder}>
-              <ContributionGraph values={commitsData} endDate={new Date('2017-04-01')}
-                numDays={105} width={imageWidth-40} height={220} chartConfig={chartConfig} 
-              />
-            </View>
-          </View>
-          <View style={styles.section}>
-            <TouchableOpacity style={styles.button}
-              onPress={() => this.props.navigation.navigate('Editor')}
-            >
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: '700'}}>SEE ALL</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+        {this.state.page == 'home' ? this.renderHome() : null}
+        {this.state.page == 'texts' ? <Texts/> : null}
         {this.renderAppBarBttom()}
       </View>
     );
@@ -219,12 +272,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: imageWidth,
   },
+  iconContainer: {
+    flex: 1,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },  
   FAB: {
     height: 56,
     width: 56,
     borderRadius: 28,
     backgroundColor: '#8bc34a',
-    position: 'absolute',
+    position: 'relative',
     bottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
