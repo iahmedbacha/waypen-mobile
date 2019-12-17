@@ -44,7 +44,6 @@ class Texts extends Component {
   }
 
   performText = (text) => {
-    console.log('here');
     this.props.navigation.navigate('Editor', {
       text: text
     });

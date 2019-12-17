@@ -5,11 +5,13 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../screens/Home';
 import Editor from '../screens/Editor';
 import Texts from '../screens/Texts';
+import Test from '../screens/Test';
 
 const StackNavigator = createStackNavigator({
   Home, 
   Editor,
   Texts,
+  Test,
 })
 
 const DrawerNavigator =  createDrawerNavigator( {
