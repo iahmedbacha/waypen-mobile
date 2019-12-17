@@ -33,7 +33,8 @@ class Editor extends Component {
 
   onMessage = (event) => {
     this.props.navigation.navigate('Test', {
-      data: event.nativeEvent.data
+      data: event.nativeEvent.data,
+      text: this.props.navigation.getParam('text')
     });
   }
 

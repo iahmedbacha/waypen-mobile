@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import TextCard from '../components/TextCard';
 import { API_URL } from 'react-native-dotenv';
 import * as SecureStore from 'expo-secure-store';
+
+import TextCard from '../components/TextCard';
 
 const dimensions = Dimensions.get('window');
 const screenWidth = dimensions.width;
@@ -27,7 +28,7 @@ class Texts extends Component {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'authorization': 'Bearer ' + await SecureStore.getItemAsync('accessToken')
+        'authorization': 'Bearer ' + JSON.parse(await SecureStore.getItemAsync('user')).accessToken
       }
     })
     .then(response => response.json())
@@ -43,7 +44,7 @@ class Texts extends Component {
     });
   }
 
-  performText = (text) => {
+  performTest = (text) => {
     this.props.navigation.navigate('Editor', {
       text: text
     });
@@ -59,7 +60,7 @@ class Texts extends Component {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Text style={styles.title}>Choose a text to start your test</Text>
           {this.state.texts.map(text => {
-            return (<TextCard key={text.id} title={text.designation} text={text.content} onPress={() => this.performText(text)}/>);
+            return (<TextCard key={text.id} title={text.designation} text={text.content} onPress={() => this.performTest(text)}/>);
           })}
         </ScrollView>
       </View>

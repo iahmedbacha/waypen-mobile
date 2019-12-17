@@ -28,10 +28,7 @@ class SignIn extends Component {
     })
     .then(response => response.json())
     .then(responseJson => {
-      console.log('here');
-      console.log(responseJson);
-      SecureStore.setItemAsync('accessToken', responseJson.accessToken);
-      SecureStore.setItemAsync('refreshToken', responseJson.refreshToken);
+      SecureStore.setItemAsync('user', JSON.stringify(responseJson.user));
       this.props.navigation.navigate('Loading');
     })
     .catch(error => {
