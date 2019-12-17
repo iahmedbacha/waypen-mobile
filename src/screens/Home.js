@@ -60,7 +60,7 @@ const imageWidth = dimensions.width;
 class Home extends Component {
   static navigationOptions = ({navigation, navigationOptions}) => {
     return {
-      headerTitle: <Text style={{fontSize: 20, fontWeight: '400', marginLeft: 10}}>Home</Text>,
+      headerTitle: <Text style={{fontSize: 20, fontWeight: '400', marginLeft: 10}}></Text>,
       headerLeft: (
         <TouchableOpacity
           style={{marginLeft: 20}}

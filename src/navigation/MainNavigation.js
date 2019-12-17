@@ -6,6 +6,7 @@ import Home from '../screens/Home';
 import Editor from '../screens/Editor';
 import Texts from '../screens/Texts';
 import Test from '../screens/Test';
+import DrawerContentComponent from './DrawerContentComponent';
 
 const StackNavigator = createStackNavigator({
   Home, 
@@ -18,6 +19,8 @@ const DrawerNavigator =  createDrawerNavigator( {
   StackNavigator: {
     screen: StackNavigator
   }
+}, {
+  contentComponent: DrawerContentComponent
 })
 
 export default DrawerNavigator;
