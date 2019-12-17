@@ -10,6 +10,7 @@ import {
 } from "react-native-chart-kit";
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
+import { Gravatar } from 'react-native-gravatar';
 
 import Texts from './Texts';
 
@@ -90,7 +91,12 @@ class Home extends Component {
             marginRight: 20,
           }}
         >
-          <Image source={require('../assets/profile.png')}/>
+          <Gravatar options={{
+              email: 'ibrahimb31@hotmail.fr',
+              parameters: { "size": "100", "d": "retro" },
+            }}
+            style={styles.roundedProfileImage}
+          />
         </TouchableOpacity>
       )
     }
@@ -288,6 +294,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  roundedProfileImage: {
+    width:50, height:50, borderWidth:3,
+    borderColor:'white', borderRadius:50
+  }
 })
 
 export default Home;

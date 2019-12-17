@@ -17,6 +17,6 @@ function Recognizer(language, version) {
             language: this.language,
             strokes: this.strokes
         };
-        return JSON.stringify(cloudIAFormat);
+        return cloudIAFormat;
     };
 }

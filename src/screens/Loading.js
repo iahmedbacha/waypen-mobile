@@ -17,8 +17,9 @@ class Loading extends Component {
   }
 
   // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {  
-    const accessToken = await SecureStore.getItemAsync('accessToken');
+  _bootstrapAsync = async () => {
+    const user = JSON.parse(await SecureStore.getItemAsync('user'));
+    const accessToken = user && user.accessToken ? user.accessToken : null;
 
     // This will switch to the Main screen or Auth screen and this loading
     // screen will be unmounted and thrown away.

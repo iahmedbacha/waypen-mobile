@@ -59,6 +59,6 @@ function finish() {
         inkRecognizer.addStroke(stroke.id, strokeString);
     });
 
-    request = JSON.stringify(JSON.parse(inkRecognizer.data()), null, 2);
-    window.ReactNativeWebView.postMessage(request.toString());
+    request = JSON.stringify(inkRecognizer.data());
+    window.ReactNativeWebView.postMessage(request);
 }

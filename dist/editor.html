@@ -96,7 +96,7 @@ PIXEL_TO_MILLIMETERS = MILLIMETER_PER_INCH * PIXEL_RATIO / PIXEL_PER_INCH;</scri
             language: this.language,
             strokes: this.strokes
         };
-        return JSON.stringify(cloudIAFormat);
+        return cloudIAFormat;
     };
 }</script>
     <script>'use strict';
@@ -374,8 +374,8 @@ function finish() {
         inkRecognizer.addStroke(stroke.id, strokeString);
     });
 
-    request = JSON.stringify(JSON.parse(inkRecognizer.data()), null, 2);
-    window.ReactNativeWebView.postMessage(request.toString());
+    request = JSON.stringify(inkRecognizer.data());
+    window.ReactNativeWebView.postMessage(request);
 }</script>
   </body>
 </html>
